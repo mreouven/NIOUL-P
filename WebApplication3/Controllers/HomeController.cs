@@ -19,11 +19,33 @@ namespace WebApplication3.Controllers
             Object a = Request.Form;
             return View();
         }
+        public ActionResult checkfbapi()
+        {
+            
+            if (Request.Form["email"] != null)
+            {
+                string email = Request.Form["email"];
+                UsersDal udal = new UsersDal();
+                List<Users> dbuser = (from x in udal.User where x.Email.Equals(email) select x).ToList();
+                if (dbuser.Count > 0)
+                {
+                    var ok = new {success = "true", email =  Request.Form["email"],password=dbuser[0].Password};
+                    
+                    return Json(ok, JsonRequestBehavior.AllowGet);
+                }
+                var uk = new { success = "false", message = "not user found" };
+                return Json(uk, JsonRequestBehavior.AllowGet);
+            }
+            var res = new { success = "false", message = "API KEY INVALIDE" };
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
 
         public ActionResult ValidateRegister(Users users)
         {
             if (ModelState.IsValid)
             {
+                
                 ViewBag.Error = ""  ;
                 users.type = "0";
                 UsersDal udal = new UsersDal();
@@ -44,12 +66,21 @@ namespace WebApplication3.Controllers
         }
         public ActionResult Login(Users obj)
         {
+            if (Session["Log"] != null)
+            {
+                string a = Session["Log"].ToString();
+            }
             return View();
         }
-
+        public ActionResult Logout()
+        {
+            Session["Log"] = null;
+            return RedirectToAction("Login", new Users());
+        }
 
         public ActionResult CheckLogin(Users obj)
         {
+            string email = Request.Form["email"];
             UsersDal udal = new UsersDal();
             List<Users> dbuser = (from x in udal.User where x.Email.Equals(obj.Email) select x).ToList();
 
@@ -60,32 +91,19 @@ namespace WebApplication3.Controllers
             }
             else
             {
-                if (!Hashing.ValidatePassword(obj.Password, dbuser[0].Password))
+                if (obj.Password!= dbuser[0].Password)
                 {
                     ViewBag.Error = "password Wrong";
                     return View("Login", obj);
                 }
 
-                Session["idlog"] = dbuser[0].Email;
-                Session["Log"] = dbuser[0].type;
+                Session["Log"] = dbuser[0].Email;
                 if (dbuser[0].type == "0")
                 {
-                    return RedirectToAction("Choice", "Customer");
+                    return RedirectToAction("Index", "Home");
 
                 }
-                if (dbuser[0].type == "1")
-                {
-                    return RedirectToAction("ChoiceFood", "Admin");
-                }
-                if (dbuser[0].type == "2")
-                {
-                    return RedirectToAction("ChoiceServices", "Admin");
-                }
-                if (dbuser[0].type == "3")
-                {
-                    return RedirectToAction("ChoiceResponsable", "Admin");
-
-                }
+              
                 return View("Login", obj);
 
             }
