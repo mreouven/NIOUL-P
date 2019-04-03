@@ -1,0 +1,145 @@
+﻿@model WebApplication3.Models.Users
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<script src="~/js/jquery.validate.js"></script>
+<script src="~/js/jquery.validate.unobtrusive.js"></script>
+<script src="~/js/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.79/jquery.form-validator.js"></script>
+<script src="~/js/bootstrap.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="container">
+    <div class="viewbag" style="color:orangered">@ViewBag.Error</div>
+    <style>        .viewbag {
+            font-size: 30px;
+        }
+    </style>
+    <form class="form-horizontal" onsubmit="event.preventDefault(); validate()" action="ValidateRegister" role="form" method="post" id="formreg">
+        <h2>Registration</h2>
+        <div class="form-group">
+
+            <label for="firstName" class="col-sm-3 control-label">First Name</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.First_Name, new { Class = "form-control", autofocus = "" , placeholder = "Please enter First Name" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Last_Name, new { Class = "form-control" , placeholder = "Please enter Last Name" })
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email* </label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Email, new { Class = "form-control", type = "email", placeholder = "Please enter Email" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Password*</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Password, new { Class = "form-control", placeholder = "Please enter Password" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Confirm Password*</label>
+            <div class="col-sm-9">
+                <input type="password" id="password" placeholder="Confirm Password" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Phone_Number, new { Class = "form-control" , placeholder = "Please enter phone Number" })
+                <span class="help-block">Your phone number won't be disclosed anywhere </span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Gender</label>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            @Html.RadioButton("Gender", "Female")Female
+
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            @Html.RadioButton("Gender", "Male")Male
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.form-group -->
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <span class="help-block">*Required fields</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form> <!-- /form -->
+
+</div> <!-- ./container -->
+<script>
+
+function validate()
+{
+    var fname = document.forms["formreg"]["First_Name"];
+    var lname = document.forms["formreg"]["Last_Name"];
+    var email = document.forms["formreg"]["Email"];
+    var phone = document.forms["formreg"]["Phone_Number"];
+    var password = document.forms["formreg"]["Password"];
+    var password2 = document.forms["formreg"]["password"];
+
+    var Gender = document.forms["formreg"]["Gender"];
+
+	if (fname.value == "")
+	{
+		window.alert("Please enter your First_Name.");
+		fname.focus();
+		return false;
+	}
+
+    if (lname.value == "")
+	{
+        window.alert("Please enter your Last_Name.");
+		lname.focus();
+		return false;
+	}
+
+
+
+	if (phone.value == "")
+	{
+		window.alert("Please enter your telephone number.");
+		phone.focus();
+		return false;
+	}
+    if (password.value == '') {
+        window.alert("Please enter your password");
+        password.focus();
+        return false;
+    }
+    if (password.value != password2.value)
+	{
+		window.alert("Password Not Matching");
+		password.focus();
+		return flase;
+	}
+
+    if (Gender.value == '')
+	{
+		alert("Please enter your Gender.");
+		return false;
+	}
+
+    document.forms['formreg'].submit();
+}</script>
