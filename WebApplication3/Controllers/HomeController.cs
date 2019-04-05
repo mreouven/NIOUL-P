@@ -75,7 +75,7 @@ namespace WebApplication3.Controllers
         public ActionResult Logout()
         {
             Session["Log"] = null;
-            return RedirectToAction("Login", new Users());
+            return RedirectToAction("Index", new Users());
         }
 
         public ActionResult CheckLogin(Users obj)

@@ -143,8 +143,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cooking.cs" />
     <Compile Include="Models\Hashing.cs" />
+    <Compile Include="Models\Recipes.cs" />
     <Compile Include="Models\Reset.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
