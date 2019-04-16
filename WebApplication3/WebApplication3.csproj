@@ -139,10 +139,21 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RecipesController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="CVM\RecipeComCVM.cs" />
+    <Compile Include="DAL\CommentDal.cs" />
+    <Compile Include="DAL\RecipesDal.cs" />
     <Compile Include="DAL\UsersDal.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904082334117_InitialCreate.cs" />
+    <Compile Include="Migrations\201904082334117_InitialCreate.Designer.cs">
+      <DependentUpon>201904082334117_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Hashing.cs" />
     <Compile Include="Models\Recipes.cs" />
     <Compile Include="Models\Reset.cs" />
@@ -150,16 +161,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\animate.css" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\camera.css" />
+    <Content Include="css\classy-nav.min.css" />
+    <Content Include="css\custom-icon.css" />
     <Content Include="css\elastislide.css" />
     <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
     <Content Include="css\form.css" />
     <Content Include="css\grid.css" />
     <Content Include="css\ie.css" />
+    <Content Include="css\magnific-popup.css" />
+    <Content Include="css\nice-select.min.css" />
+    <Content Include="css\owl.carousel.min.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\slider.css" />
     <Content Include="css\style.css" />
@@ -173,6 +191,42 @@
     <Content Include="images\arrowws.png" />
     <Content Include="images\banner_icon1.png" />
     <Content Include="images\banner_icon2.png" />
+    <Content Include="images\bg-img\about.png" />
+    <Content Include="images\bg-img\add.png" />
+    <Content Include="images\bg-img\bg1.jpg" />
+    <Content Include="images\bg-img\bg2.jpg" />
+    <Content Include="images\bg-img\bg3.jpg" />
+    <Content Include="images\bg-img\bg4.jpg" />
+    <Content Include="images\bg-img\bg5.jpg" />
+    <Content Include="images\bg-img\bg6.jpg" />
+    <Content Include="images\bg-img\bg7.jpg" />
+    <Content Include="images\bg-img\breadcumb1.jpg" />
+    <Content Include="images\bg-img\breadcumb2.jpg" />
+    <Content Include="images\bg-img\breadcumb3.jpg" />
+    <Content Include="images\bg-img\breadcumb4.jpg" />
+    <Content Include="images\bg-img\breadcumb5.jpg" />
+    <Content Include="images\bg-img\insta1.jpg" />
+    <Content Include="images\bg-img\insta2.jpg" />
+    <Content Include="images\bg-img\insta3.jpg" />
+    <Content Include="images\bg-img\insta4.jpg" />
+    <Content Include="images\bg-img\insta5.jpg" />
+    <Content Include="images\bg-img\insta6.jpg" />
+    <Content Include="images\bg-img\insta7.jpg" />
+    <Content Include="images\bg-img\r1.jpg" />
+    <Content Include="images\bg-img\r2.jpg" />
+    <Content Include="images\bg-img\r3.jpg" />
+    <Content Include="images\bg-img\r4.jpg" />
+    <Content Include="images\bg-img\r5.jpg" />
+    <Content Include="images\bg-img\r6.jpg" />
+    <Content Include="images\bg-img\sr1.jpg" />
+    <Content Include="images\bg-img\sr2.jpg" />
+    <Content Include="images\bg-img\sr3.jpg" />
+    <Content Include="images\bg-img\sr4.jpg" />
+    <Content Include="images\bg-img\sr5.jpg" />
+    <Content Include="images\bg-img\sr6.jpg" />
+    <Content Include="images\bg-img\sr7.jpg" />
+    <Content Include="images\bg-img\sr8.jpg" />
+    <Content Include="images\bg-img\sr9.jpg" />
     <Content Include="images\big1.jpg" />
     <Content Include="images\big10.jpg" />
     <Content Include="images\big2.jpg" />
@@ -183,6 +237,19 @@
     <Content Include="images\big7.jpg" />
     <Content Include="images\big8.jpg" />
     <Content Include="images\big9.jpg" />
+    <Content Include="images\blog-img\1.jpg" />
+    <Content Include="images\blog-img\2.jpg" />
+    <Content Include="images\blog-img\3.jpg" />
+    <Content Include="images\core-img\burger.svg" />
+    <Content Include="images\core-img\cake2.png" />
+    <Content Include="images\core-img\favicon.ico" />
+    <Content Include="images\core-img\hamburger.png" />
+    <Content Include="images\core-img\hamburger2.png" />
+    <Content Include="images\core-img\logo.png" />
+    <Content Include="images\core-img\pancake.png" />
+    <Content Include="images\core-img\pizza.png" />
+    <Content Include="images\core-img\rib.png" />
+    <Content Include="images\core-img\salad.png" />
     <Content Include="images\dier1.jpg" />
     <Content Include="images\dier2.jpg" />
     <Content Include="images\dier3.jpg" />
@@ -230,11 +297,16 @@
     <Content Include="images\veg1.jpg" />
     <Content Include="images\veg2.jpg" />
     <Content Include="images\veg3.jpg" />
+    <Content Include="js\active.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="css\style.css.map" />
     <None Include="js\jquery-3.3.1.intellisense.js" />
+    <Content Include="js\bootstrap\bootstrap.min.js" />
+    <Content Include="js\bootstrap\popper.min.js" />
     <Content Include="js\camera.js" />
     <Content Include="js\forms.js" />
+    <Content Include="js\google-map\map-active.js" />
     <Content Include="js\html5shiv.js" />
     <Content Include="js\jquery-3.3.1.js" />
     <Content Include="js\jquery-3.3.1.min.js" />
@@ -256,8 +328,10 @@
     <Content Include="js\jquery.validate.unobtrusive.js" />
     <Content Include="js\jquery.validate.unobtrusive.min.js" />
     <Content Include="js\jquerypp.custom.js" />
+    <Content Include="js\jquery\jquery-2.2.4.min.js" />
     <Content Include="js\modernizr-2.8.3.js" />
     <Content Include="js\modernizr.custom.63321.js" />
+    <Content Include="js\plugins\plugins.js" />
     <Content Include="js\superfish.js" />
     <Content Include="js\touchTouch.jquery.js" />
     <Content Include="Web.config" />
@@ -277,6 +351,18 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\FACERegister.cshtml" />
+    <Content Include="Views\Recipes\Index.cshtml" />
+    <Content Include="scss\style.scss" />
+    <Content Include="scss\_fonts.scss" />
+    <Content Include="scss\_mixin.scss" />
+    <Content Include="scss\_responsive.scss" />
+    <Content Include="scss\_theme_color.scss" />
+    <Content Include="Views\Recipes\addRecipe.cshtml" />
+    <Content Include="Views\Recipes\printRecipes.cshtml" />
+    <Content Include="Views\Recipes\Receips.cshtml" />
+    <Content Include="Views\User\Gestion.cshtml" />
+    <Content Include="Views\User\UserData.cshtml" />
+    <Content Include="Views\Recipes\CommentGestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -294,6 +380,11 @@
     <None Include="packages.config" />
     <Content Include="js\jquery-3.3.1.slim.min.map" />
     <Content Include="js\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201904082334117_InitialCreate.resx">
+      <DependentUpon>201904082334117_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

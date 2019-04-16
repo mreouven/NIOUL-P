@@ -185,3 +185,5 @@ C:\Users\USER\Documents\GitHub\NIOUL-P\WebApplication3\obj\Debug\WebApplication3
 C:\Users\USER\Documents\GitHub\NIOUL-P\WebApplication3\obj\Debug\WebApplication3.csproj.CoreCompileInputs.cache
 C:\Users\USER\Documents\GitHub\NIOUL-P\WebApplication3\obj\Debug\WebApplication3.dll
 C:\Users\USER\Documents\GitHub\NIOUL-P\WebApplication3\obj\Debug\WebApplication3.pdb
+C:\Users\mreou\source\repos\WebApplication3\WebApplication3\obj\Debug\WebApplication3.Migrations.InitialCreate.resources
+C:\Users\mreou\source\repos\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csproj.GenerateResource.cache
