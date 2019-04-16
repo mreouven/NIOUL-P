@@ -1,1 +1,155 @@
-﻿
+﻿@model WebApplication3.Models.Recipes
+@{
+    ViewBag.Title = "addRecipe";
+}
+
+<style>
+    #conteneur {
+        display: flex;
+        flex-direction: column;
+    }
+    .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        
+    }
+
+        .rating input {
+            position: absolute;
+            left: -999999px;
+        }
+
+        .rating label {
+            display: inline-block;
+            font-size: 0;
+        }
+
+        .rating > label:before {
+            position: relative;
+            font: 24px/1 FontAwesome;
+            display: block;
+            content: "\f005";
+            color: #ccc;
+            background: -webkit-linear-gradient(-45deg, #d9d9d9 0%, #b3b3b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before,
+        .rating > label.selected:before,
+        .rating > label.selected ~ label:before {
+            color: #f0ad4e;
+            background: -webkit-linear-gradient(-45deg, #fcb551 0%, #d69a45 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+</style>
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<form action="addRecipe" method="post">
+    <div class="contact-form-area">
+
+        <div class="col-12 col-lg-6">
+            @Html.TextBoxFor(m => m.Name, new { Class = "form-control", placeholder = "Name", required = string.Empty })
+
+        </div>
+
+
+
+        <div class="col-12">
+
+            @Html.TextBoxFor(m => m.tempsdepreparation, new { Class = "form-control", placeholder = "Prepa Time", required = string.Empty })
+        </div>
+        <div class="col-12">
+            @Html.TextBoxFor(m => m.tempsdecuisson, new { Class = "form-control", placeholder = "Cooking Time", required = string.Empty })
+        </div>
+        <div class="col-12">
+            @Html.TextBoxFor(m => m.nombrePers, new { Class = "form-control", placeholder = "Number of Yield", required = string.Empty })
+        </div>
+
+    </div>
+
+   
+    <div class="col-12 col-lg-6">
+        @Html.DropDownListFor(m => m.types, (SelectList)ViewBag.Type)
+    </div>
+    <br />
+    <br />
+
+    <div class="input-group control-group after-add-more row">
+        <input type="text" name="nameingredient[]" class="form-control col-xs-6" placeholder="Name Ingredient" required>
+        <input type="text" name="quantiteingredient[]" class="form-control col-xs-6" placeholder="Quantitie" required>
+        <div class="input-group-btn">
+            <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i> Add</button>
+        </div>
+    </div>
+    @Html.Label("Difficulty")
+    <div class="rating">
+        <label>
+            <input type="radio" id="rating" name="rating" value="5" title="5 stars"> 5
+        </label>
+        <label>
+            <input type="radio" id="rating" name="rating" value="4" title="4 stars"> 4
+        </label>
+        <label>
+            <input type="radio" id="rating" name="rating" value="3" title="3 stars"> 3
+        </label>
+        <label>
+            <input type="radio" id="rating" name="rating" value="2" title="2 stars"> 2
+        </label>
+        <label>
+            <input type="radio" id="rating" name="rating" value="1" title="1 star"> 1
+        </label>
+    </div>
+    <div class="contact-form-area">
+        <div class="col-12">
+            @Html.TextAreaFor(m => m.explication, new { Class = "form-control", placeholder = "Preparation Explaine", required = string.Empty })
+
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button class="btn delicious-btn mt-30" type="submit">Post Comments</button>
+    </div>
+</form>
+
+<!-- Copy Fields -->
+<div class="copy hide" hidden>
+    <div class="control-group input-group" style="margin-top:10px">
+        <input type="text" name="nameingredient[]" class="form-control" placeholder="Name Ingredient" required>
+        <input type="text" name="quantiteingredient[]" class="form-control" placeholder="Quantitie" required>
+
+        <div class="input-group-btn">
+            <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("rating").required=true;
+    $('.rating input').change(function () {
+        var $radio = $(this);
+        $('.rating .selected').removeClass('selected');
+        $radio.closest('label').addClass('selected');
+    });
+
+    $(document).ready(function () {
+
+
+        $(".add-more").click(function () {
+            var html = $(".copy").html();
+            $(".after-add-more").after(html);
+        });
+
+
+        $("body").on("click", ".remove", function () {
+            $(this).parents(".control-group").remove();
+        });
+
+
+    });
+
+
+</script>
