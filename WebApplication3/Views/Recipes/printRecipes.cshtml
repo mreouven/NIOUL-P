@@ -95,260 +95,151 @@
             <div class="col-12 col-lg-4">
                 <div class="ingredients">
                     <h4>Ingredients</h4>
-          …
-[20:15, 16/4/2019] ראובן מימון: register.cs
-[20:15, 16/4/2019] ראובן מימון: @model WebApplication3.Models.Users
+                    @{
+                        string[] ingreds = Model.recipes.ingredients.Split('&');
+                        int count = 1;
+                    }
+                    @foreach (string x in ingreds)
+                    {
+                        string[] ingred = x.Split(':');
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck@(count)">
+                            <label class="custom-control-label" for="customCheck@(count++)"> @ingred[0].ToUpper() @ingred[1]</label>
+                        </div>
+                    }
 
-@{
-    ViewBag.Title = "Register";
-}
-
-<script src="~/js/jquery.validate.js"></script>
-<script src="~/js/jquery.validate.unobtrusive.js"></script>
-<script src="~/js/jquery-3.3.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.79/jquery.form-validator.js"></script>
-<script src="~/js/bootstrap.js"></script>
-<script src="~/js/bootstrap.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<div class="container">
-    <div class="viewbag" style="color:orangered">@ViewBag.Error</div>
-    <style>
-        .viewbag {
-            font-size: 30px;
-        }
-    </style>
-    <form class="form-horizontal" onsubmit="event.preventDefault(); validate()" action="ValidateRegister" role="form" method="post" id="formreg">
-        <h2>Registration</h2>
-        <div class="form-group">
-
-            <label for="firstName" class="col-sm-3 control-label">First Name</label>
-            <div class="col-sm-9">
-                @Html.TextBoxFor(m => m.First_Name, new { Class = "form-control", autofocus = "", placeholder = "Please enter First Name" })
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="lastName" class="col-sm-3 control-label">Last Name</label>
-            <div class="col-sm-9">
-                @Html.TextBoxFor(m => m.Last_Name, new { Class = "form-control", placeholder = "Please enter Last Name" })
-
-            </div>
+        <div class="fb-share-button"
+             data-href="https://www.your-domain.com/your-page.html"
+             data-layout="button_count">
         </div>
-        <div class="form-group">
-            <label for="email" class="col-sm-3 control-label">Email* </label>
-            <div class="col-sm-9">
-                @Html.TextBoxFor(m => m.Email, new { Class = "form-control", type = "email", placeholder = "Please enter Email" })
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password" class="col-sm-3 control-label">Password*</label>
-            <div class="col-sm-9">
-                @Html.TextBoxFor(m => m.Password, new { Class = "form-control", placeholder = "Please enter Password",type="password" })
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password" class="col-sm-3 control-label">Confirm Password*</label>
-            <div class="col-sm-9">
-                <input type="password" id="password" placeholder="Confirm Password" class="form-control">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
-            <div class="col-sm-9">
-                @Html.TextBoxFor(m => m.Phone_Number, new { Class = "form-control", placeholder = "Please enter phone Number" })
-                <span class="help-block">Your phone number won't be disclosed anywhere </span>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-sm-3">Gender</label>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="radio-inline">
-                            @Html.RadioButton("Gender", "Female")Female
-
-                        </label>
-                    </div>
-                    <div class="col-sm-4">
-                        <label class="radio-inline">
-                            @Html.RadioButton("Gender", "Male")Male
-                        </label>
+        @if (Session["Log"] != null)
+        {
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-left">
+                        <h3>Leave a comment</h3>
                     </div>
                 </div>
             </div>
-        </div> <!-- /.form-group -->
-        <div class="form-group">
-            <div class="col-sm-9 col-sm-offset-3">
-                <span class="help-block">*Required fields</span>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form-area">
+                        <form id="frmAdd">
+
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="E-mail" value="@Session["Log"]" readonly>
+                                </div>
+
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn delicious-btn mt-30">Post Comments</button>
+                                </div>
+                                <input data-val="true" data-val-required="Le champ Id est requis." hidden="" id="recipes_Id" name="recipesId" required="" type="text" value="@Model.recipes.Id" />
+
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
+        }
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <section class="comment-section">
+                @for (int i = 0; i < Model.comments.Count; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        <div class="comment user-comment">
+
+                            <div class="info">
+                                <a href="#">@Model.comments[i].email</a>
+                                <span>@Model.comments[i].date</span>
+                            </div>
+
+                            <a class="avatar" href="#">
+                                <img src="https://banner2.kisspng.com/20180716/lra/kisspng-logo-person-user-person-icon-5b4d2bd2236ca6.6010202115317841461451.jpg" width="35" alt="Profile Avatar" title="Amanda Quick" />
+                            </a>
+
+                            <p>@Model.comments[i].message</p>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="comment author-comment">
+
+                            <div class="info">
+                                <a href="#">@Model.comments[i].email</a>
+                                <span>@Model.comments[i].date</span>
+                            </div>
+
+                            <a class="avatar" href="#">
+                                <img src="https://banner2.kisspng.com/20180716/lra/kisspng-logo-person-user-person-icon-5b4d2bd2236ca6.6010202115317841461451.jpg" width="35" alt="Profile Avatar" title="Amanda Quick" />
+
+                            </a>
+                            <p>@Model.comments[i].message</p>
+                        </div>
+                    }
+
+                }
+
+            </section>
+
         </div>
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-
-                <button type="submit" class="btn btn-primary btn-block">Register</button>
-            </div>
-            <div class="col-sm-9 col-sm-offset-3">
-
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
-            </div>
-
-        </div>
-
-</form> <!-- /form -->
-
-</div> <!-- ./container -->
-<script>
-
-    function validate() {
-        var fname = document.forms["formreg"]["First_Name"];
-        var lname = document.forms["formreg"]["Last_Name"];
-        var email = document.forms["formreg"]["Email"];
-        var phone = document.forms["formreg"]["Phone_Number"];
-        var password = document.forms["formreg"]["Password"];
-        var password2 = document.forms["formreg"]["password"];
-
-        var Gender = document.forms["formreg"]["Gender"];
-
-        if (fname.value == "") {
-            window.alert("Please enter your First_Name.");
-            fname.focus();
-            return false;
-        }
-
-        if (lname.value == "") {
-            window.alert("Please enter your Last_Name.");
-            lname.focus();
-            return false;
-        }
-
-
-
-        if (phone.value == "") {
-            window.alert("Please enter your telephone number.");
-            phone.focus();
-            return false;
-        }
-        if (password.value == '') {
-            window.alert("Please enter your password");
-            password.focus();
-            return false;
-        }
-        if (password.value != password2.value) {
-            window.alert("Password Not Matching");
-            password.focus();
-            return flase;
-        }
-
-        if (Gender.value == '') {
-            alert("Please enter your Gender.");
-            return false;
-        }
-
-        document.forms['formreg'].submit();
-    }</script>
-
-
+    </div>
+</div>
 
 
 <script>
-    // This is called with the results from from FB.getLoginStatus().
-    function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        // The response object is returned with a status field that lets the
-        // app know the current login status of the person.
-        // Full docs on the response object can be found in the documentation
-        // for FB.getLoginStatus().
-        if (response.status === 'connected') {
-            // Logged into your app and Facebook.
-            testAPI();
-            
-        } else {
-            // The person is not logged into your app or we are unable to tell.
-            document.getElementById('status').innerHTML = 'Please log ' +
-                'into this app.';
-        }
-    }
+    const element = document.getElementById('frmAdd');
+    element.addEventListener('submit', event => {
+        event.preventDefault(); sendData();
+    });
 
-    // This function is called when someone finishes with the Login
-    // Button.  See the onlogin handler attached to it in the sample
-    // code below.
-    function checkLoginState() {
-        FB.getLoginStatus(function (response) {
-            statusChangeCallback(response);
+
+    function sendData() {
+        var frmData = $("#frmAdd").serialize();
+        $.post("getComment", frmData, function (data) {
+            if (data.status == false)
+                alert('comment Dont Sent');
+            else {
+                addData($("#message").val(), $("#email").val())
+                $("#message").val("");
+                alert('Comment Sent Sucess')
+            }
         });
     }
 
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '989584871412750',
-            cookie: true,  // enable cookies to allow the server to access
-            // the session
-            xfbml: true,  // parse social plugins on this page
-            version: 'v3.2' // The Graph API version to use for the call
-        });
 
-        // Now that we've initialized the JavaScript SDK, we call
-        // FB.getLoginStatus().  This function gets the state of the
-        // person visiting this page and can return one of three states to
-        // the callback you provide.  They can be:
-        //
-        // 1. Logged into your app ('connected')
-        // 2. Logged into Facebook, but not your app ('not_authorized')
-        // 3. Not logged into Facebook and can't tell if they are logged into
-        //    your app or not.
-        //
-        // These three cases are handled in the callback function.
+    function addData(message, mail) {
+        var a = ' <div class="comment user-comment"><div class="info"><a href="#">' + mail +
+            '</a > <span>' + Date.now() + '</span></div> <a class="avatar" href="#"><img src="https://banner2.kisspng.com/20180716/lra/kisspng-logo-person-user-person-icon-5b4d2bd2236ca6.6010202115317841461451.jpg" width="35" alt="Profile Avatar" title="Amanda Quick" /> </a>' +
+            '<p>' + message + '</p> </div>';
+        $(".comment-section").append(a);
+    }
+</script>
 
-        FB.getLoginStatus(function (response) {
-            statusChangeCallback(response);
-        });
 
-    };
 
-    // Load the SDK asynchronously
+<div id="fb-root"></div>
+<script>
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
         fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    // Here we run a very simple test of the Graph API after login is
-    // successful.  See statusChangeCallback() for when this call is made.
-    function testAPI() {
-
-        FB.api('/me?locale=en_US&fields=first_name,last_name,email,gender,birthday', function (response) {
-            document.forms["formreg"]["First_Name"].value = response.first_name;
-            document.forms["formreg"]["Last_Name"].value = response.last_name;
-            document.forms["formreg"]["Email"].value = response.email;
-            if (response.gender == 'male')
-                document.forms["formreg"]["Gender"][1].cheked = true;
-            else
-                document.forms["formreg"]["Gender"][0].cheked = true;
-
-
-        });
-
-    }
-    function diconnect() {
-        FB.logout(function (response) {
-            // Person is now logged out
-        });
-    }
-</script>
-
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-
-
-
-<div id="status">
-</div>
+    }(document, 'script', 'facebook-jssdk'));</script>
