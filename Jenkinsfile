@@ -5,7 +5,7 @@ pipeline {
     stage('Git') {
       // Get some code from a GitHub repository
       steps{
-          git 'https://github.com/markrity/dotnet-example-nunit.git'
+          git 'https://github.com/mreouven-study/NIOUL-P.git'
       }
    }
     stage('Dotnet Restore'){
