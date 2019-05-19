@@ -71,11 +71,10 @@
 
     </div>
 
-
+   
     <div class="col-12 col-lg-6">
         @Html.DropDownListFor(m => m.types, (SelectList)ViewBag.Type)
     </div>
-
     <br />
     <br />
 
@@ -104,7 +103,6 @@
             <input type="radio" id="rating" name="rating" value="1" title="1 star"> 1
         </label>
     </div>
-   
     <div class="contact-form-area">
         <div class="col-12">
             @Html.TextAreaFor(m => m.explication, new { Class = "form-control", placeholder = "Preparation Explaine", required = string.Empty })
