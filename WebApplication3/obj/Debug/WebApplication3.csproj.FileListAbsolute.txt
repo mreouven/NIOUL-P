@@ -1,4 +1,3 @@
-C:\Users\mreou\source\repos\WebApplication3\WebApplication3\bin\WebApplication3.dll.config
 C:\Users\mreou\source\repos\WebApplication3\WebApplication3\bin\WebApplication3.dll
 C:\Users\mreou\source\repos\WebApplication3\WebApplication3\bin\WebApplication3.pdb
 C:\Users\mreou\source\repos\WebApplication3\WebApplication3\bin\roslyn\csc.exe
