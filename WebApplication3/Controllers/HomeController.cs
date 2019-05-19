@@ -12,7 +12,8 @@ namespace WebApplication3.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+         return RedirectToAction("Receips", "Recipes");
+
         }
         public ActionResult Register(Users users) {
             
@@ -75,6 +76,8 @@ namespace WebApplication3.Controllers
         public ActionResult Logout()
         {
             Session["Log"] = null;
+            Session["Type"] = null;
+
             return RedirectToAction("Index", new Users());
         }
 
@@ -99,11 +102,8 @@ namespace WebApplication3.Controllers
 
                 Session["Log"] = dbuser[0].Email;
                 Session["Type"] = dbuser[0].type;
-
-                return RedirectToAction("Index", "Home");
-
                 
-              
+                return RedirectToAction("Index", "Home");
 
             }
         }

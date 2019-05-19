@@ -77,7 +77,9 @@
         <td>Gender</td>
         <td>Password</td>
         <td>Phone_Number </td>
+        <td>Mail </td>
         <td>Type </td>
+        <td>Nb of Recipes </td>
         <td></td>
         <td></td>
 
@@ -123,25 +125,35 @@
             var type;
             if (users[k].type == 0) type = "user";
             if (users[k].type == 1) type = "Admin";
-
-           
-                var newR =
-
-
-
-                    "<tr>" +
-                    "<td>" + users[k].First_Name + "</td>" +
-                    "<td>" + users[k].Last_Name + "</td>" +
-                    "<td>" + users[k].Gender + "</td>" +
-                    "<td>" + '*********' + "</td>" +
-                    "<td>" + users[k].Phone_Number + "</td>" +
-                    "<td>" + type + "</td>" +
-
-                    "<td><button onclick=\"delete_users('" + users[k].Email + "')\">delete</button></td>" +
-                    "<td><button onclick=\"reset_pass('" + users[k].Email + "')\">reset_pass</button></td>" +
-                    " </tr>";
-                tbl.append(newR);
             
+            $.ajax({
+                url: '/Recipes/GetReceiptwithUser?email='+users[k].Email,
+                global: false,
+                type: 'GET',
+                data: { },
+                async: false, //blocks window close
+                success: function (data) {
+
+                    var newR =
+
+
+
+                        "<tr>" +
+                        "<td>" + users[k].First_Name + "</td>" +
+                        "<td>" + users[k].Last_Name + "</td>" +
+                        "<td>" + users[k].Gender + "</td>" +
+                        "<td>" + '*********' + "</td>" +
+                        "<td>" + users[k].Phone_Number + "</td>" +
+                        "<td>" + users[k].Email + "</td>" +
+                        "<td>" + type + "</td>" +
+                        "<td>" + data.length + "</td>" +
+
+                        "<td><button onclick=\"delete_users('" + users[k].Email + "')\">delete</button></td>" +
+                        "<td><button onclick=\"reset_pass('" + users[k].Email + "')\">reset_pass</button></td>" +
+                        " </tr>";
+                    tbl.append(newR);
+                }
+            });
         }
         $("#statue").text("");
     }

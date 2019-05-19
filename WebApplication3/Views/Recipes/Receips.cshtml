@@ -100,8 +100,9 @@
 @if (!(Session["Type"] != null && Session["Type"].ToString() == "1"))
 {
     <style>
-        .deleteR{
-            display:none !important;
+       
+        .Admin {
+            display: none !important;
         }
     </style>
 }
@@ -131,7 +132,10 @@
                     ' <p>' + element.explication + ' </p>' +
                     '<a href="@Url.Content("~/Recipes/printRecipes?id=")' + element.Id + '" class="btn delicious-btn mt-30">Read More</a>' +
 
-                    '<a onclick="delete_recipes(\'' + element.Id+'\')" class="deleteR btn delicious-btn mt-30">Delete</a>' +
+                    '<a onclick="delete_recipes(\'' + element.Id + '\')" class="Admin btn delicious-btn mt-30">Delete</a>' +
+                    '<a href="/Recipes/updateRecipes?id=' + element.Id+'" class="Admin btn delicious-btn mt-30">Update</a>' +
+                   
+             
                     '</div>' +
                     '</div>';
                 $(".blog-posts-area").append(p);

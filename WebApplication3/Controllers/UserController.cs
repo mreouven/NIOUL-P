@@ -42,10 +42,10 @@ namespace WebApplication3.Controllers
             //Session["Log"] = "3";
             if (Session["Log"] == null)
             {
-                ViewBag.Error = "not logged";
-                return View("~/Views/Home/NotLogged.cshtml");
+                return RedirectToAction("Login", "Home");
+
             }
-           
+
             return View();
         }
         // GET: User
