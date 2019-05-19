@@ -20,14 +20,48 @@ namespace WebApplication3.Controllers
             string[] split = test.Split('&');
             return View();
         }
+        
         public ActionResult Receips()
         {
             return View();
 
         }
+        public JsonResult GetReceiptwithUser()
+        {
+            if (Request.Params["email"] != null)
+            {
+                string em=Request.Params["email"];
+                return Json(new RecipesDal().Recipes.Where(d => d.user == em), JsonRequestBehavior.AllowGet);
+            }
+
+            if (Session["log"] != null)
+            {
+                string email = Session["log"].ToString() ;
+                return Json(new RecipesDal().Recipes.Where(d => d.user == email), JsonRequestBehavior.AllowGet);
+
+            }
+
+            return Json(new { statut = false,message= "Not connected" }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult recipesGestion()
+        {
+            if (Session["log"] != null)
+            {
+                return View();
+            }
+            return RedirectToAction("Login", "Home");
+
+        }
         public JsonResult sendReceipt()
         {
-           
+            if (Request.Params["idReceips"] != null) {
+                string idReceips = Request.Params["idReceips"];
+                return Json(new RecipesDal().Recipes.Where(d => d.Id == idReceips), JsonRequestBehavior.AllowGet);
+
+            }
+
             return Json(new RecipesDal().Recipes.ToList<Recipes>(), JsonRequestBehavior.AllowGet);
 
         }
@@ -85,8 +119,23 @@ namespace WebApplication3.Controllers
 
             return null;
         }
+        public JsonResult badword()
+        {
+            bool b=false;
+            if (Request.Params["word"] != null)
+            {
+                string word = Request.Params["word"];
+                string[] lines = System.IO.File.ReadAllLines(@"C:\Users\mreou\source\repos\WebApplication3\WebApplication3\data\dabWords.txt");
+                 b = Array.Exists(lines, element => element.ToLower() == word.ToLower());
+            }
 
 
+
+            return Json(new { statut = b }, JsonRequestBehavior.AllowGet);
+
+          
+        }
+        
 
         public ActionResult printRecipes(Recipes test)
         {
@@ -165,6 +214,51 @@ namespace WebApplication3.Controllers
                 var a = Request.Form["nameingredient[]"];
                 return View(test);
             }
+        }
+
+        public ActionResult updateRecipes(Recipes recdipes)
+        {
+            if (recdipes.Name!=null)
+            {
+                RecipesDal recipesDal = new RecipesDal();
+                Recipes connec=recipesDal.Recipes.Where(d => d.Id == recdipes.Id).First();
+                
+                connec.Name = recdipes.Name;
+                connec.nombrePers = recdipes.nombrePers;
+                connec.tempsdecuisson = recdipes.tempsdecuisson;
+                connec.tempsdepreparation = recdipes.tempsdepreparation;
+                connec.explication = recdipes.explication;
+                recipesDal.SaveChanges();
+                return RedirectToAction("Index", "Home");
+
+            }
+            ViewBag.Update = "ok";
+            if (Session["Log"] != null)
+            {
+                if (Request.Params["id"] != null)
+                {
+                    RecipesDal recipesDal = new RecipesDal();
+                    string id = Request.Params["id"];
+                    List<Recipes> dbuser = (from x in recipesDal.Recipes where x.Id.Equals(id) select x).ToList();
+                    if(dbuser.Count > 0)
+                    {
+                        List<Object> listeDesRestos = new List<Object>
+            {
+                new { Id = "Cake", Nom = "Cake" },
+                new { Id = "Entery", Nom = "Entery" },
+                new { Id = "Repas", Nom = "Repas" },
+                new { Id = "Dessert", Nom = "Dessert" },
+            };
+
+                        ViewBag.Type = new SelectList(listeDesRestos, "Id", "Nom");
+                        return View(dbuser[0]);
+                    }
+                    
+
+                }
+            }
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }

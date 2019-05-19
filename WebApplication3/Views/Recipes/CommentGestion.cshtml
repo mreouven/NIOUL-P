@@ -7,8 +7,9 @@
 <script src="~/js/jquery-3.3.1.js"></script>
 <table id="dataComment" class="table">
     <tr>
-        <td>FisrtName </td>
-        <td>LastName </td>
+        <td>USER </td>
+        <td>Comment </td>
+        <td>Recipes</td>
         <td>Del</td>
 
 
@@ -17,6 +18,34 @@
     </tr>
 </table>
 <script>
+
+    $(document).ready(function () {
+        $(".comment").each(function (index) {
+            var obj = $(this);
+            $.ajax({
+                url: '/Recipes/badword',
+                global: false,
+                type: 'POST',
+                data: { word: $(this).text() },
+                async: false, //blocks window close
+                success: function (data) {
+                    if (data.statut == true) {
+                        //obj.css('color', 'red');
+
+                        obj.css('background-color', 'red');
+                        setInterval(myRepeat(obj[0]), 500);
+
+                    }
+                }
+
+            });
+        })
+    });
+
+    function myRepeat(obj) {
+        obj.delay(150).fadeOut(1000).delay(150).fadeIn(1000);
+    }
+    
     function start() {
         $("#dataComment").find("tr:gt(0)").remove();
 
@@ -24,16 +53,28 @@
             var tbl = $("#dataComment");
 
             for (k = 0; k < data.length; k++) {
+                $.ajax({
+                    url: 'sendReceipt',
+                    global: false,
+                    type: 'GET',
+                    data: { idReceips: data[k].idReceips},
+                    async: false, //blocks window close
+                    success: function (Rece) {
+                        var newR =
 
-                var newR =
 
+                            "<tr>" +
+                            "<td>" + data[k].email + "</td>" +
+                            "<td class=\"comment\">" + data[k].message + "</td>" +
+                            "<td>" + Rece[0].Name + "</td>" +
 
-                    "<tr>" +
-                    "<td>" + data[k].email + "</td>" +
-                    "<td>" + data[k].message + "</td>" +
-                    "<td><button onclick=\"delete_comment('" + data[k].id + "')\">delete</button></td>" +
-                    "</tr>";
-                tbl.append(newR);
+                            "<td><button onclick=\"delete_comment('" + data[k].id + "')\">delete</button></td>" +
+                            "</tr>";
+                        tbl.append(newR);
+
+                    }
+                });
+                
             }
 
         });
