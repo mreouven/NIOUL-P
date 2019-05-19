@@ -16,7 +16,7 @@ pipeline {
 
     stage('Build'){
           steps{
-               sh "dotnet build"
+               sh "dotnet build WebApplication3.sln"
                }
     }
     stage('Run Tests'){
