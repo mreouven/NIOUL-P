@@ -143,6 +143,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="CVM\RecipeComCVM.cs" />
     <Compile Include="DAL\CommentDal.cs" />
+    <Compile Include="DAL\PostDal.cs" />
     <Compile Include="DAL\RecipesDal.cs" />
     <Compile Include="DAL\UsersDal.cs" />
     <Compile Include="Global.asax.cs">
@@ -155,6 +156,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Hashing.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Recipes.cs" />
     <Compile Include="Models\Reset.cs" />
     <Compile Include="Models\Users.cs" />
@@ -366,6 +368,7 @@
     <Content Include="Views\Recipes\CommentGestion.cshtml" />
     <Content Include="Views\Recipes\updateRecipes.cshtml" />
     <Content Include="Views\Recipes\recipesGestion.cshtml" />
+    <Content Include="Views\Home\Blog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

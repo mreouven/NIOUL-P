@@ -3,10 +3,12 @@ pipeline {
     environment {HOME = '/tmp'} 
     stages {
     stage('Git') {
+		
       // Get some code from a GitHub repository
       steps{
           git 'https://github.com/mreouven-study/NIOUL-P.git'
       }
+	 
    }
     stage('Dotnet Restore'){
         steps{
@@ -21,6 +23,7 @@ pipeline {
 
     stage('Build'){
           steps{
+				C:\Program Files (x86)\Jenkins\workspace\DQ
                sh "dotnet build WebApplication3.sln"
                }
     }

@@ -108,6 +108,16 @@ namespace WebApplication3.Controllers
             }
         }
 
+        public ActionResult Blog()
+        {
+    
+
+            return View();
+        }
+        public JsonResult getPost ()
+        {
+            return Json(new PostDal().Posts.ToList<Post>(), JsonRequestBehavior.AllowGet);
+        }        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
