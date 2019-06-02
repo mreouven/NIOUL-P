@@ -25,7 +25,7 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-4">
                 <div class="receipe-headline my-5">
                     <span>April 05, 2018</span>
                     <h2>@Model.recipes.Name</h2>
@@ -36,7 +36,9 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-12 col-md-4 col-centered" style="margin-top: 54px;" id="reco">
+                <img src="~/images/remended.jpg" class="img-fluid" alt="Responsive image">
+            </div>
             <div class="col-12 col-md-4">
                 <div class="receipe-ratings text-right my-5">
                     <div class="ratings">
@@ -243,3 +245,14 @@
         js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+ <script>
+     window.onload = function () {
+      //   $('#reco').hide();
+     };
+
+ </script>
+

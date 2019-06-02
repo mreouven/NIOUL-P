@@ -1,0 +1,140 @@
+﻿$green: #6DBE46;
+$yellow: #F0E91B;
+$orange: #F89A21;
+$purple: #8F2F60;
+$red: #861720;
+
+body {
+    width: 90%;
+    margin: 0 auto;
+    color: #222222;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.intro {
+    text-align: center;
+    display: block;
+    padding-bottom: 0.5em;
+    margin: 0 auto;
+
+    h1 {
+        font-family: "Oleo Script";
+        text-shadow: white 1px 1px 0;
+        color: rgb(39, 75, 106);
+    }
+}
+
+.wrapper {
+    text-align: center;
+    margin-top: 2em;
+}
+
+.cta {
+    font-size: 1.5rem;
+}
+
+.gauge {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.gauge__values {
+    position: absolute;
+    font-family: 'Helvetica Neue';
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    margin-left: -(126/2) * 1px;
+    left: 50%;
+    //top: 115px;
+    top: 50%;
+    margin-top: -(24/2) * 1px;
+
+    .yellow &, .orange & {
+        color: #000;
+    }
+}
+
+.gauge_value, .gauge_rating {
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+}
+
+.gauge_value {
+    font-size: .85em;
+}
+
+.gauge_rating {
+    font-size: 2em;
+    letter-spacing: .1em;
+}
+
+svg {
+    display: block;
+    margin: 1em auto 0;
+}
+
+.outer_ring {
+    fill: #AFE1F9;
+}
+
+.spinner {
+    fill: #6FBE46;
+    stroke: #FFFFFF;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    transform-origin: 120px 120px;
+    transition: all 1s;
+
+    .green & {
+        fill: $green;
+        transform: rotate(75deg);
+    }
+
+    .yellow & {
+        fill: $yellow;
+        transform: rotate(125deg);
+    }
+
+    .orange & {
+        fill: $orange;
+        transform: rotate(180deg);
+    }
+
+    .purple & {
+        fill: $purple;
+        transform: rotate(230deg);
+    }
+
+    .red & {
+        fill: $red;
+        transform: rotate(280deg);
+    }
+}
+
+.ring_green {
+    fill: $green;
+}
+
+.ring_yellow {
+    fill: $yellow;
+}
+
+.ring_orange {
+    fill: $orange;
+}
+
+.ring_purple {
+    fill: $purple;
+}
+
+.ring_red {
+    fill: $red;
+}
+
+.type {
+    fill: #fff;
+}

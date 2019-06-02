@@ -304,6 +304,7 @@
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="css\style.css.map" />
+    <Content Include="css\jauge.scss" />
     <None Include="js\jquery-3.3.1.intellisense.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />
     <Content Include="js\bootstrap\popper.min.js" />
