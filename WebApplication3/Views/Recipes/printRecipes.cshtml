@@ -37,7 +37,10 @@
                 </div>
             </div>
             <div class="col-12 col-md-4 col-centered" style="margin-top: 54px;" id="reco">
-                <img src="~/images/remended.jpg" class="img-fluid" alt="Responsive image">
+                @if (Model.recipes.recommanded)
+                {
+                    <img src="~/images/remended.jpg" class="img-fluid" alt="Responsive image">
+                }
             </div>
             <div class="col-12 col-md-4">
                 <div class="receipe-ratings text-right my-5">
@@ -251,6 +254,7 @@
 
  <script>
      window.onload = function () {
+         
       //   $('#reco').hide();
      };
 

@@ -21,7 +21,8 @@ namespace WebApplication3.Migrations
                         nombrePers = c.String(nullable: false),
                         ingredients = c.String(nullable: false),
                         explication = c.String(nullable: false),
-                    })
+                        recommanded = c.Boolean(nullable: true)
+                })
                 .PrimaryKey(t => t.Id);
             
         }

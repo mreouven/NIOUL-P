@@ -153,6 +153,10 @@
     <Compile Include="Migrations\201904082334117_InitialCreate.Designer.cs">
       <DependentUpon>201904082334117_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906021419255_d.cs" />
+    <Compile Include="Migrations\201906021419255_d.Designer.cs">
+      <DependentUpon>201906021419255_d.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Hashing.cs" />
@@ -391,6 +395,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904082334117_InitialCreate.resx">
       <DependentUpon>201904082334117_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906021419255_d.resx">
+      <DependentUpon>201906021419255_d.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

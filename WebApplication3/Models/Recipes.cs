@@ -43,6 +43,10 @@ namespace WebApplication3.Models
 
         public string explication { get; set; } //List
 
+       
+
+        public Boolean recommanded { get; set; } //List
+
 
     }
 }
